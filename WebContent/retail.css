@@ -1,0 +1,565 @@
+/**
+ * Copyright 2015 IBM Corp. All Rights Reserved.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+/**
+ * Copyright 2015 IBM Corp. All Rights Reserved.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+.housing .productDetails .productDesc table {
+  margin-top: -40px;
+}
+.housing .productDetails .productDesc table tr {
+  background: inherit;
+}
+.retailApp .header {
+  background-color: #00cdd1 ! important;
+  height: 60px;
+  padding: 0 10px;
+}
+.retailApp .header .logo {
+  width: 117px;
+  height: 25px;
+  display: inline-block;
+  background-image: url('images/NestsLogo_large.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-top: 16px;
+}
+.retailApp .header .actionsGroup {
+  right: 10px;
+  position: absolute;
+  top: 35%;
+}
+.retailApp .header .actionsGroup span {
+  display: inline-block;
+  border-right: 1px #FFF solid;
+  padding: 0px 10px;
+  vertical-align: middle;
+}
+.retailApp .header .actionsGroup span a {
+  display: block;
+  color: #FFF;
+  font-size: 12px;
+  font-weight: bold;
+}
+.retailApp .header .actionsGroup span:last-child {
+  border-right: 0;
+}
+.retailApp a {
+  text-decoration: initial;
+  font-size: 12px;
+}
+.retailApp a:hover {
+  text-decoration: underline;
+}
+.retailApp a.disabled {
+  pointer-events: none;
+  opacity: 0.4;
+}
+.retailApp .dataPane {
+  padding: 8px 0 0 8px;
+  background-color: #325c80;
+}
+.retailApp #map,
+.retailApp #about,
+.retailApp #termsOfUse {
+  background-color: #325c80;
+}
+.retailApp #about,
+.retailApp #termsOfUse {
+  color: #FFF;
+  font-size: 17px;
+  font-family: 'Cabin';
+  font-weight: normal;
+}
+.retailApp #about a,
+.retailApp #termsOfUse a {
+  font-size: inherit;
+  color: #FF0;
+}
+.retailApp #appPane {
+  padding: 0;
+}
+.retailApp .mainContainer > .dijitGutter {
+  background-color: #808080;
+  width: 2px;
+}
+.retailApp .mainContainer .analyzePane {
+  background-color: #90EE90;
+  color: white;
+}
+.retailApp .mainContainer .centerPane {
+  margin: -5px;
+  padding-left: 30px ! important;
+}
+.retailApp .mainContainer .centerPane .dijitBorderContainer-child {
+  border: 0;
+  padding-left: 0;
+}
+.retailApp .mainContainer .centerPane .breadCrumbs * {
+  color: #325c80;
+}
+.retailApp .mainContainer .centerPane .statusLine {
+  width: 75%;
+  font-size: 16px;
+  display: inline-block;
+  color: #4D4D4D;
+  font-style: italic;
+}
+.retailApp .mainContainer .centerPane .smartCompareButton {
+  right: 8px;
+  position: absolute;
+  margin: 0;
+}
+.retailApp .mainContainer .centerPane .smartCompareButton .dijitButtonNode {
+  background: #8bc53f ! important;
+  padding-bottom: 2px;
+}
+.retailApp .mainContainer .centerPane .smartCompareButton .dijitButtonNode .taIcon {
+  background-image: url("images/favicon.ico");
+  width: 16px;
+  height: 16px;
+}
+.retailApp .mainContainer .centerPane .smartCompareButton .dijitButtonText {
+  font-size: 14px;
+  color: #FFF;
+}
+.retailApp .mainContainer .centerPane .sortArea {
+  right: 8px;
+  position: absolute;
+  font-size: 12px;
+  color: #4D4D4D;
+}
+.retailApp .mainContainer .centerPane .sortArea .title {
+  color: #4D4D4D;
+  font-size: 12px;
+}
+.retailApp .mainContainer .centerPane .sortArea .sortBy {
+  color: #4D4D4D;
+  font-size: 12px;
+  background-color: #E8F8F9;
+  border: 1px solid #999;
+  border-radius: 4px;
+  width: 176px;
+  padding-left: 8px;
+}
+.retailApp .mainContainer .centerPane .sortArea .sortBy input {
+  color: #4D4D4D;
+  font-size: 12px;
+}
+.retailApp .mainContainer .centerPane .sortArea .sortBy.dijitTextBoxFocused .dijitInputContainer {
+  background: inherit;
+}
+.retailApp .mainContainer .centerPane .theGrid {
+  border-top: 4px solid #CCC;
+  max-height: 90vh;
+}
+.retailApp .mainContainer .centerPane .theGrid .dojoxGridHeader {
+  display: none;
+}
+.retailApp .mainContainer .centerPane .theGrid .dojoxGridCell {
+  vertical-align: top;
+  border: 0 ! important;
+  padding-bottom: 10px;
+  padding-left: 0;
+}
+.retailApp .mainContainer .centerPane .theGrid .dojoxGridRowTable {
+  border-bottom: 1px solid #cccccc;
+}
+.retailApp .mainContainer .centerPane .theGrid .dojoxGridRowOdd .dojoxGridRowTable tr {
+  background-color: inherit;
+}
+.retailApp .mainContainer .centerPane .theGrid .dojoxGridRowSelected .dojoxGridRowTable tr {
+  background-color: #E8F8F9;
+}
+.retailApp .mainContainer .centerPane .theGrid .dojoxGridRowOver .dojoxGridCell {
+  background-color: #E8F8F9;
+}
+.retailApp .filtersPane {
+  width: 23%;
+  max-width: 250px;
+  overflow: overlay;
+  background-color: #325c80 ! important;
+}
+.retailApp .filtersPane .head {
+  margin-bottom: 10px;
+}
+.retailApp .filtersPane .title {
+  color: white;
+  font-size: 14px;
+}
+.retailApp .filtersPane .clearAll {
+  right: 10px;
+  position: absolute;
+  font-size: 12px;
+  color: white;
+}
+.retailApp .filtersPane > div > div > .dijitTitlePaneTextNode {
+  font-weight: bolder;
+}
+.retailApp .filtersPane .filterGroup {
+  margin-bottom: 5px;
+  color: white;
+}
+.retailApp .filtersPane .filterGroup .dijitTitlePaneTitleOpen,
+.retailApp .filtersPane .filterGroup .dijitTitlePaneTitleFixedOpen {
+  background-color: inherit;
+}
+.retailApp .filtersPane .filterGroup .dijitTitlePaneTitle {
+  border-radius: 5px;
+  color: #666666;
+  font-size: 13px;
+  background-color: #E8F8F9;
+}
+.retailApp .filtersPane .filterGroup .dijitTitlePaneContentOuter {
+  border: 0;
+  background: inherit;
+}
+.retailApp .filtersPane .filterGroup .dijitSliderImageHandleH {
+  background-image: url("images/slider_handle.png");
+  background-size: contain;
+  background-position: 0 0;
+}
+.retailApp .filtersPane .filterGroup .dijitSliderHover .dijitSliderImageHandleH {
+  background-position: 0 0;
+}
+.retailApp .filtersPane .filterGroup .dijitArrowNode {
+  position: absolute;
+  right: 20px;
+  margin-top: 5px;
+}
+.retailApp .filtersPane .filterGroup .dijitRuleLabelsContainer {
+  color: white;
+}
+.retailApp .filtersPane .filterGroup .dijitRuleMark {
+  border-color: white;
+}
+.retailApp .filtersPane .filterGroup .filterItem {
+  padding: 2px;
+  font-size: smaller;
+}
+.retailApp .filtersPane .filterGroup .filterItem .dijitCheckBox {
+  background-image: none;
+}
+.retailApp .filtersPane .filterGroup .filterItem .dijitCheckBoxInput {
+  opacity: 1;
+}
+.retailApp .dijitDialogUnderlay {
+  background: #152935;
+  opacity: 0.8;
+}
+.taPlaceholder {
+  width: 90vw;
+  height: 90vh;
+  padding: 0;
+}
+.moovPane.visible {
+  z-index: 1;
+}
+.smartComaprer {
+  background-color: rgba(21, 41, 53, 0.9);
+  padding: 20px;
+}
+.smartComaprer .results {
+  margin: 8px;
+  font-size: 18px;
+  color: #FFF;
+}
+.smartComaprer .results .b {
+  font-style: italic;
+}
+.launch {
+  margin: 15px auto;
+  display: table;
+}
+.launch a {
+  margin: 8px;
+  color: #8adde3;
+  font-size: 12px;
+}
+.launch a img {
+  vertical-align: bottom;
+}
+.launch a:first-child {
+  margin-left: 0;
+}
+.launch .splitter {
+  margin-left: 8px;
+  border: 1px solid #8adde3;
+}
+.poweredBy {
+  margin-left: auto;
+  margin-right: auto;
+  width: 105px;
+}
+.poweredBy span {
+  color: #FFF;
+  font-size: 9px;
+  font-style: italic;
+  vertical-align: middle;
+}
+.poweredBy .icon {
+  background-image: url(images/IBM_Watson_avatar_simple_2color.png);
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+.wizard {
+  background-color: rgba(21, 41, 53, 0.9);
+  padding: 68px 68px 38px 68px;
+}
+.wizard .main {
+  position: relative;
+}
+.wizard .main .step {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.wizard .main .step td {
+  vertical-align: top;
+}
+.wizard .main .text {
+  color: #FFF;
+  font-size: 29px;
+  line-height: 1.5em;
+  padding-top: 1em;
+}
+.wizard .main .text1 {
+  color: #FFF;
+  font-size: 18px;
+}
+.wizard .main .text2 {
+  color: #FFF;
+  font-size: 14px;
+}
+.wizard .main .step0 .top {
+  margin-left: auto;
+  margin-right: auto;
+  width: 350px;
+}
+.wizard .main .step0 .top .watsonIcon {
+  background-image: url(images/IBM_Watson_avatar_simple_2color.png);
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+.wizard .main .step0 .top span {
+  color: #FFF;
+  font-size: 50px;
+}
+.wizard .main .step1 .guideQE {
+  width: 320px;
+  height: 277px;
+  float: right;
+}
+.wizard .main .step2 .guideFilters {
+  background-image: url(images/GuideFilters.png);
+  width: 320px;
+  height: 277px;
+  display: inline-block;
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+.wizard .footer {
+  text-align: center;
+}
+.wizard .footer .nav {
+  margin: 10px auto;
+  width: 350px;
+}
+.wizard .footer .nav a {
+  color: #8adde3;
+  font-size: 20px;
+}
+.wizard .footer .nav .splitter {
+  margin: 0 8px;
+  border: 1px solid #8adde3;
+}
+.wizard .footer .stepLinks {
+  margin-left: auto;
+  margin-right: auto;
+  width: 350px;
+}
+.wizard .footer .stepLinks a {
+  color: #FFF;
+  font-size: 14px;
+  width: 24px;
+  height: 24px;
+  margin: 10px;
+  display: inline-block;
+  text-align: center;
+  line-height: 24px;
+  opacity: 0.4;
+  cursor: default;
+  vertical-align: middle;
+}
+.wizard .footer .stepLinks a.next,
+.wizard .footer .stepLinks a.prev {
+  margin: 10px 0;
+}
+.wizard .footer .stepLinks a.next img,
+.wizard .footer .stepLinks a.prev img {
+  height: 100%;
+  width: 70%;
+}
+.wizard .footer .stepLinks a.step {
+  background-color: #8adde3;
+  border: 1px solid #e6e7e8;
+  border-radius: 14px;
+}
+.wizard .footer .stepLinks a.current {
+  opacity: 1;
+  cursor: pointer;
+}
+.wizard.learnWizard {
+  padding: 45px;
+}
+.wizard.learnWizard .main {
+  height: 350px;
+  width: 786px;
+}
+.wizard.favoriteWizard {
+  padding: 20px;
+}
+.wizard.favoriteWizard .main {
+  width: 600px;
+}
+.dijitComboBoxMenu {
+  padding-left: 10px;
+}
+.dijitComboBoxMenu .dijitMenuItem {
+  color: #4D4D4D;
+  font-size: 12px;
+}
+.dijitComboBoxMenu .dijitMenuItem.dijitMenuItemHover,
+.dijitComboBoxMenu .dijitMenuItem.dijitMenuItemSelected {
+  border-color: #E8F8F9;
+  background-color: #E8F8F9;
+}
+.retailApp .dijitTooltipConnector {
+  background-image: url("images/connectors.png");
+}
+.retailApp .dijitTooltipContainer {
+  padding: 0 ! important;
+  background: rgba(0, 0, 0, 0) ! important;
+  border: 0 ! important;
+  box-shadow: none ! important;
+}
+.closeMe {
+  background-image: url(images/close.png);
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  float: right;
+  top: 8px;
+  position: relative;
+  right: 8px;
+  cursor: pointer;
+  z-index: 1;
+}
+.dijitDialog .dijitDialogPaneContent {
+  overflow: inherit ! important;
+  padding: 0;
+}
+.dijitDialog .dijitDialogTitleBar {
+  display: none;
+}
+.dijitPopup {
+  z-index: 100 ! important;
+}
+.productDetails {
+  margin-top: 20px;
+  margin-left: 30px;
+}
+.productDetails .productName {
+  font-size: 16px;
+  font-weight: bold;
+  color: #000000;
+  display: block;
+  margin-bottom: 10px;
+}
+.productDetails .productDesc {
+  font-size: 14px;
+  color: black;
+  white-space: pre-line;
+  margin-bottom: 2px;
+  line-height: 1.5;
+}
+.productBrief {
+  margin-top: 15px;
+  position: relative;
+}
+.productBrief .productFavorite {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50px;
+  display: none;
+}
+.productBrief .productFavorite.dominated {
+  display: block;
+}
+.productBrief .productImage {
+  max-width: 100%;
+  max-height: 100%;
+  width: inherit;
+  height: inherit;
+}
+.productBrief .productPrice {
+  font-size: 16px;
+  font-weight: bold;
+  color: #325c80;
+  text-align: center;
+  display: block;
+}
+.productBrief .wishlist {
+  text-align: center;
+  display: block;
+}
+.productBrief .addToCartButton {
+  height: 29px;
+  background-Color: #325c80;
+  border-style: solid;
+  border-color: #999;
+  border-width: 1px;
+  padding-left: 8px;
+  padding-right: 8px;
+  color: #FFF;
+  font-size: 12px;
+  font-weight: bold;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  cursor: pointer;
+}

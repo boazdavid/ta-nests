@@ -1,0 +1,68 @@
+<div class="retailApp" data-dojo-attach-event="onClick:closePopups">
+	<div data-dojo-type="dijit/layout/BorderContainer" style="width: 100%; height: 100%;" data-dojo-props="gutters:false" class="mainContainer" data-dojo-attach-point="topContainer">
+		<div data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="region:'center'" class="centerPane" >
+			<div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'top'">
+				<span data-dojo-attach-point="breadCrumbs" class="breadCrumbs">
+				</span>
+				<button data-dojo-attach-point="smartButton" data-dojo-type="dijit/form/Button" type="button" data-dojo-attach-event="onClick:launch, onMouseEnter: waitForInvite" 
+					class="smartCompareButton" data-dojo-props="iconClass:'taIcon', disabled:true" style="pointer-events: none;">Compare</button>
+					
+				<div data-dojo-type="dijit/TooltipDialog" data-dojo-attach-point="inviteTooltip" style="display:none;">
+					<span class="closeMe" data-dojo-attach-event="onClick: closeInviteTooltip" title="Close"></span>
+					<div class="smartComaprer">
+						<div class="results">
+							<span data-dojo-attach-point ="optionsLength" class="a"></span>
+							<span class="b">results to choose from.</span>
+							<span class="c"> Need help deciding?</span>
+						</div>
+						<div class="launch">
+							<a href="javascript: dijit.byId('${id}').launch();">
+								<img alt="" src="images/favicon.ico"/>
+								<span>Launch Tradeoff Analytics</span>
+							</a>
+							<span class="splitter"></span>
+							<a href="javascript: dijit.byId('${id}').learn()">Learn more</a>
+						</div>
+						<div class="poweredBy">
+							<a href = "http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/tradeoff-analytics.html" target="_blank">
+								<span>Powered By</span>
+								<span class="icon"></span>
+							</a>
+						</div> 
+					</div>
+				</div>
+				<div data-dojo-type="dijit/Dialog" data-dojo-attach-point="learnDialog" style="display:none;">
+					<span class="closeMe" data-dojo-attach-event="onClick: closeLearnDialog" title="Close"></span>
+					<div data-dojo-attach-point="learnWizard" data-dojo-type="retail/LearnWizard" data-dojo-props="app:dijit.byId('${id}')" 
+						data-dojo-attach-event="launch:closeLearnAndLaunch, closeMe:closeLearnDialog"></div>
+				</div>
+			</div>
+			<div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'top'">
+				<span data-dojo-attach-point="statusLine" class="statusLine"></span> 
+				<span class="sortArea"> 
+					<span class="title">Sort by:</span> 
+					<select data-dojo-type="dijit/form/ComboBox" data-dojo-attach-point="sortBy" class="sortBy" data-dojo-attach-event="onChange:sortChanged" data-dojo-props="searchAttr:'label', labelAttr:'label'">
+					</select>
+<!-- 									<select data-dojo-attach-point="sortBy" data-dojo-attach-event="onchange:sortChanged "> -->
+<!-- 									</select> -->
+				</span>
+			</div>
+			<div data-dojo-type="dojox/grid/EnhancedGrid" data-dojo-props="region:'center'" id="grid" class="theGrid" data-dojo-attach-point="grid"></div>
+		</div>
+
+		<div data-dojo-type="dijit/layout/ContentPane" class="filtersPane" data-dojo-props="region:'left'">
+			<div class="head">
+				<span class="title">Filter By</span> <a class="clearAll" href="javascript:dijit.byId('${id}').clearAllFilters()">Clear all</a>
+			</div>
+			<div data-dojo-type="retail/FiltersWidget" data-dojo-attach-point="filters"></div>
+		</div>
+	</div>
+	
+	<div data-dojo-type="dijit/TooltipDialog" data-dojo-attach-point="favoriteTooltip" style="display:none;">
+		<span class="closeMe" data-dojo-attach-event="onClick: closeFavoriteTooltip" title="Close"></span>
+		<div data-dojo-type="retail/FavoriteWizard" data-dojo-attach-event="launch: closeFavoriteAndLaunch, learn: closeFavoriteAndLearn"></div>
+	</div>
+	<div data-dojo-attach-point="moovDialog" data-dojo-type="dijit/Dialog" title="MOOV" class="moovDialog">
+		<div data-dojo-attach-point="taPlaceholder" class="taPlaceholder"></div>
+	</div>
+</div>

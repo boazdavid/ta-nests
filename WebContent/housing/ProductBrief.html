@@ -1,0 +1,10 @@
+ <div class="productBrief" >
+	<img src="${sol.image}" class="productImage" ></img>
+	<img data-dojo-attach-point="favoriteDiv" class='productFavorite' usemap="#${id}_map" src="images/Note.png"></img>
+	<map name="${id}_map" >
+		<area data-dojo-attach-point="favoriteArea" shape="poly" coords="0,0, 0,50, 50,0, 0,0" href="javascript: dijit.byId('${id}').why()">
+	</map>
+	<div class='productPrice' data-dojo-attach-point="productPrice"></div>
+	<input type='button' class='addToCartButton' value='Contact' onclick="window.open('${sol.url}')"></input>
+		
+</div>

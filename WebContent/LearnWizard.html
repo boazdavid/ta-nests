@@ -1,0 +1,65 @@
+<div class="wizard learnWizard">
+	<div class="main">
+		<div class="step step0" data-dojo-attach-point="step0">
+			<div class="top">
+				<span class="watsonIcon"></span> <span>WELCOME!</span>
+			</div>
+
+			<div class="text">
+				How much better can your decision making get?
+			</div>
+			<div class="text">
+				Watson's Tradeoff Analytics does the wizardly
+				job of sorting through all your search results to
+				provide you with the top options to compare.
+			</div>
+		</div>
+
+		<div class="step step1" data-dojo-attach-point="step1">
+			<table>
+				<tr>
+					<td><span class="text">Explore different alternatives. Add or remove objectives and see how that
+							impacts your top results.</span></td>
+					<td><img src="images/GuideQE.png" class="guideQE"></img></td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="step step2" data-dojo-attach-point="step2">
+			<table>
+				<tr>
+					<td><span class="text">Use the filters to refine your results.</span></td>
+					<td><span class="guideFilters"></span></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<div class="footer">
+		<div data-dojo-attach-point="stepLinks" class="stepLinks">
+			<a class="prev" data-dojo-attach-point="previous" href="javascript:dijit.byId('${id}').goPrev()">
+				<img  src="images/Anglebracket_left.png">
+			</a> 
+			<a class="step" href="javascript:dijit.byId('${id}').goTo(0)">1</a> 
+			<a class="step" href="javascript:dijit.byId('${id}').goTo(1)">2</a> 
+			<a class="step" href="javascript:dijit.byId('${id}').goTo(2)">3</a>
+			<a class="next" data-dojo-attach-point="next" href="javascript:dijit.byId('${id}').goNext()">
+				<img  src="images/Anglebracket_right.png">
+			</a> 
+		</div>
+		<div class="launch">
+			<a  href="javascript:dijit.byId('${id}').launch()">
+				<img alt="" src="images/favicon.ico"/>
+				<span>Launch Tradeoff Analytics</span>
+			</a>
+			<span class="splitter"></span>
+			<a href="javascript: dijit.byId('${id}').closeMe()">Exit</a>
+		</div>
+		<div class="poweredBy">
+			<a href = "http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/tradeoff-analytics.html" target="_blank">
+				<span>Powered By</span>
+				<span class="icon"></span>
+			</a>
+		</div> 
+	</div>
+</div>

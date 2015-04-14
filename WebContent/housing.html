@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Nests</title>
+
+<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/dojo/1.9.3/dojo/resources/dojo.css"></link>
+<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/dojo/1.9.3/dijit/themes/dijit.css"></link>
+<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/dojo/1.9.3/dijit/themes/claro/claro.css"></link>
+<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/dojo/1.9.3/dijit/themes/claro/document.css"></link>
+<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/dojo/1.9.3/dojox/form/resources/RangeSlider.css"></link>
+<link rel="stylesheet"
+	href="//ajax.googleapis.com/ajax/libs/dojo/1.9.3/dojox/grid/enhanced/resources/claro/EnhancedGrid.css"></link>
+<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/dojo/1.9.3/dojox/form/resources/Rating.css"></link>
+<link rel="stylesheet" href="retail.css"></link>
+
+</head>
+<body class="claro" style="width: 100%; height: 100vh">
+	<div class="retailApp" data-dojo-attach-event="onClick:closePopups" style="width: 100%; height: 100%">
+		<div data-dojo-type="dijit/layout/BorderContainer" style="width: 100%; height: 100%;" data-dojo-props="gutters:false">
+			<div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'top'" style="padding: 0px">
+				<div class="header">
+					<a href="javascript:toMap()"> <span class="logo"></span></a> 
+					<span class="actionsGroup"> 
+						<span> <a href="javascript:toAbout()">About</a></span> 
+						<span> <a href="javascript:toTermsOfUse()">Terms of Use</a>	</span> 
+						<span> <a href="http://www.ibm.com/privacy/us/en/" target="_blank">Privacy Policy</a></span> 
+						<span> <a href="https://github.com/watson-developer-cloud/yourcelebritymatch" target="_blank">Fork </a></span>
+					</span>
+				</div>
+			</div>
+
+			<div data-dojo-type="dijit/layout/StackContainer" id="mainContainer" data-dojo-id="container" data-dojo-props="region:'center'">
+				<div id="map" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="href:'housing/map.html'"></div>
+				<div id="about" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="href:'housing/about.html'"></div>
+				<div id="termsOfUse" data-dojo-type="dijit/layout/ContentPane"
+					data-dojo-props="href:'housing/AppGalleryTermsOfUse.html'"></div>
+				<div id="appPane" data-dojo-type="dijit/layout/ContentPane">
+					<div data-dojo-id="app" data-dojo-type="retail.RetailApp" style="width: 100%; height: 100%"></div>
+				</div>
+			</div>
+			<div data-dojo-type="dojox/widget/Standby" data-dojo-id="standby" data-dojo-props="target:'mainContainer'"></div>
+		</div>
+	</div>
+	<script>
+    var dojoConfig = {
+//       async : false,
+//       useXDomain :true,
+      parseOnLoad : false,
+      packages : [ {
+        name : 'retail',
+        location : location.pathname.replace(/\/[^/]*$/, '') || '/.'
+      } ]
+    };
+  </script>
+	<script src="//ajax.googleapis.com/ajax/libs/dojo/1.9.3/dojo/dojo.js" data-dojo-config="async: true"></script>
+	<script type="text/javascript" src="http://ta-cdn.mybluemix.net/TradeoffAnalytics.js"></script>
+	<script src="utils.js"></script>
+
+	<script>
+    var housingDomain = {
+      subject : "House",
+      cssClass : 'housing',
+      theme : 'watson',
+      title : 'Nests',
+      breadCrumbs : [ {
+        text : 'Home',
+        href : 'javascript:toMap()'
+      }, {
+        //text : utils.queryParams().state
+      } ],
+      data : {
+        module : 'retail/housing/OptionsProvider',
+        clazz : 'retail.housing.OptionsProvider',
+        args : {
+          //query : 'sState=' + utils.queryParams().abbr
+        }
+      },
+      meta : {
+        module : 'retail/housing/HousingMetadata',
+        clazz : 'retail.housing.HousingMetadata'
+      }
+    };
+    require([ "dojo/parser", "dojo/ready", "dojo", "dijit/dijit", "dijit/layout/BorderContainer",
+        "dijit/layout/ContentPane", "dijit/layout/StackContainer","retail/RetailApp" ,"dojox/widget/Standby"], function(parser,
+        ready) {
+      ready(function() {
+        parser.parse().then(function() {
+          standby.show();
+          app.start(housingDomain, function() {
+            standby.hide();
+          });
+          toMap();
+        }, function(err) {
+          console.error(err);
+        });
+      })
+
+    });
+    function toMap() {
+      container.selectChild("map");
+    }
+    function toAbout() {
+      container.selectChild("about");
+    }
+    function toTermsOfUse() {
+      container.selectChild("termsOfUse");
+    }
+    function stateClicked(abbr) {
+      toState(abbr);
+    }
+    function stateName (abbr) {
+      var names = [ "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware",
+          "District of Columbia", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas",
+          "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi",
+          "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York",
+          "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island",
+          "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington",
+          "West Virginia", "Wisconsin", "Wyoming" ];
+      var abbrs = [ "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA",
+          "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC",
+          "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY" ];
+      var i = abbrs.indexOf(abbr);
+      return names[i];
+    }
+    function toState(abbr) {
+      container.selectChild("appPane");
+      housingDomain.data.args.query = 'sState=' + abbr;
+      housingDomain.breadCrumbs[1].text = stateName(abbr);
+      app.loadAndBind(abbr, function() {
+        console.log('loaded');
+      });
+    }
+  </script>
+</body>
+</html>
