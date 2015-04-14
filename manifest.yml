@@ -1,6 +1,6 @@
 applications:
 - services:
-  - Tradeoff Analytics.pstg-yc
+  - tradeoff-analytics-service
   name: ta-housing
   path: output/webApp.war
   memory: 512M
