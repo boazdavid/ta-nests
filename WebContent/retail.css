@@ -92,13 +92,12 @@
 .retailApp #termsOfUse {
   color: #FFF;
   font-size: 17px;
-  font-family: 'Cabin';
   font-weight: normal;
 }
 .retailApp #about a,
 .retailApp #termsOfUse a {
   font-size: inherit;
-  color: #FF0;
+  color: #00CDD1;
 }
 .retailApp #appPane {
   padding: 0;
