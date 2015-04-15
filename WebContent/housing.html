@@ -20,17 +20,17 @@
 		<div data-dojo-type="dijit/layout/BorderContainer" style="width: 100%; height: 100%;" data-dojo-props="gutters:false">
 			<div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'top'" style="padding: 0px">
 				<div class="header">
-					<a href="javascript:toMap()"> <span class="logo"></span></a> 
-					<span class="actionsGroup"> 
-						<span> <a href="javascript:toAbout()">About</a></span> 
-						<span> <a href="javascript:toTermsOfUse()">Terms of Use</a>	</span> 
-						<span> <a href="http://www.ibm.com/privacy/us/en/" target="_blank">Privacy Policy</a></span> 
-						<span> <a href="https://github.com/boazdavid/ta-nests" target="_blank">Fork </a></span>
+					<a href="javascript:hash('map')"> <span class="logo"></span></a> <span class="actionsGroup"> <span>
+							<a href="javascript:hash('about')">About</a>
+					</span> <span> <a href="javascript:hash('termsOfUse')">Terms of Use</a>
+					</span> <span> <a href="http://www.ibm.com/privacy/us/en/" target="_blank">Privacy Policy</a></span> <span> <a
+							href="https://github.com/boazdavid/ta-nests" target="_blank">Fork </a></span>
 					</span>
 				</div>
 			</div>
 
-			<div data-dojo-type="dijit/layout/StackContainer" id="mainContainer" data-dojo-id="container" data-dojo-props="region:'center'">
+			<div data-dojo-type="dijit/layout/StackContainer" id="mainContainer" data-dojo-id="container"
+				data-dojo-props="region:'center'">
 				<div id="map" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="href:'housing/map.html'"></div>
 				<div id="about" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="href:'housing/about.html'"></div>
 				<div id="termsOfUse" data-dojo-type="dijit/layout/ContentPane"
@@ -44,8 +44,8 @@
 	</div>
 	<script>
     var dojoConfig = {
-//       async : false,
-//       useXDomain :true,
+      //       async : false,
+      //       useXDomain :true,
       parseOnLoad : false,
       packages : [ {
         name : 'retail',
@@ -67,13 +67,13 @@
         text : 'Home',
         href : 'javascript:toMap()'
       }, {
-        //text : utils.queryParams().state
+      //text : utils.queryParams().state
       } ],
       data : {
         module : 'retail/housing/OptionsProvider',
         clazz : 'retail.housing.OptionsProvider',
         args : {
-          //query : 'sState=' + utils.queryParams().abbr
+        //query : 'sState=' + utils.queryParams().abbr
         }
       },
       meta : {
@@ -81,35 +81,38 @@
         clazz : 'retail.housing.HousingMetadata'
       }
     };
-    require([ "dojo/parser", "dojo/ready", "dojo", "dijit/dijit", "dijit/layout/BorderContainer",
-        "dijit/layout/ContentPane", "dijit/layout/StackContainer","retail/RetailApp" ,"dojox/widget/Standby"], function(parser,
-        ready) {
+    require([ "dojo/parser", "dojo/ready", "dojo/topic", "dojo/hash", "dojo", "dijit/dijit",
+        "dijit/layout/BorderContainer", "dijit/layout/ContentPane", "dijit/layout/StackContainer", "retail/RetailApp",
+        "dojox/widget/Standby" ], function(parser, ready, topic, hash) {
+
       ready(function() {
         parser.parse().then(function() {
+          topic.subscribe("/dojo/hashchange", function(hashValue) {
+            container.selectChild(hashValue);
+          });
           standby.show();
           app.start(housingDomain, function() {
             standby.hide();
           });
-          toMap();
+          hash('map');
         }, function(err) {
           console.error(err);
         });
-      })
-
+      });
     });
-    function toMap() {
-      container.selectChild("map");
-    }
-    function toAbout() {
-      container.selectChild("about");
-    }
-    function toTermsOfUse() {
-      container.selectChild("termsOfUse");
-    }
+    //     function toMap() {
+    //       container.selectChild("map");
+    //     }
+    //     function toAbout() {
+    //       container.selectChild("about");
+    //     }
+    //     function toTermsOfUse() {
+    //       container.selectChild("termsOfUse");
+    //     }
     function stateClicked(abbr) {
       toState(abbr);
     }
-    function stateName (abbr) {
+    function stateName(abbr) {
       var names = [ "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware",
           "District of Columbia", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas",
           "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi",
@@ -124,11 +127,16 @@
       return names[i];
     }
     function toState(abbr) {
-      container.selectChild("appPane");
+      hash("appPane");
       housingDomain.data.args.query = 'sState=' + abbr;
       housingDomain.breadCrumbs[1].text = stateName(abbr);
       app.loadAndBind(abbr, function() {
         console.log('loaded');
+      });
+    }
+    function hash(url){
+      require(["dojo/hash"], function(hash){
+        hash(url);
       });
     }
   </script>

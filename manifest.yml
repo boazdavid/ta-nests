@@ -1,6 +1,6 @@
 applications:
 - services:
   - tradeoff-analytics-service
-  name: ta-housing
+  name: ta-nests
   path: output/webApp.war
   memory: 512M

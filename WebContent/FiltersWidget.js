@@ -149,7 +149,7 @@ define([ "dojo/_base/declare", "dijit/_Widget", "dojox/form/RangeSlider", "dijit
         minimum : min,
         maximum : max,
         value : [ min, max ],
-        intermediateChanges : true,
+        intermediateChanges : false,
         onChange : onChange
       };
       if (filterDef.discreteValues) {

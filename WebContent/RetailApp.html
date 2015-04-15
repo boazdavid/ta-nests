@@ -1,5 +1,5 @@
 <div class="retailApp" data-dojo-attach-event="onClick:closePopups">
-	<div data-dojo-type="dijit/layout/BorderContainer" style="width: 100%; height: 100%;" data-dojo-props="gutters:false" class="mainContainer" data-dojo-attach-point="topContainer">
+	<div id="${id}_main" data-dojo-type="dijit/layout/BorderContainer" style="width: 100%; height: 100%;" data-dojo-props="gutters:false" class="mainContainer" data-dojo-attach-point="topContainer">
 		<div data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="region:'center'" class="centerPane" >
 			<div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'top'">
 				<span data-dojo-attach-point="breadCrumbs" class="breadCrumbs">
@@ -56,6 +56,8 @@
 			</div>
 			<div data-dojo-type="retail/FiltersWidget" data-dojo-attach-point="filters"></div>
 		</div>
+		<div data-dojo-type="dojox/widget/Standby" data-dojo-attach-point="standby" data-dojo-props="target:'${id}_main'"></div>
+	
 	</div>
 	
 	<div data-dojo-type="dijit/TooltipDialog" data-dojo-attach-point="favoriteTooltip" style="display:none;">
