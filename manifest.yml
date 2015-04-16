@@ -1,6 +1,11 @@
+---
+declared-services:
+  tradeoff-analytics-service:
+    label: tradeoff_analytics
+    plan: free
 applications:
 - services:
   - tradeoff-analytics-service
-  name: ta-nests
-  path: output/webApp.war
+  name: nests
+  path: webApp.war
   memory: 512M
