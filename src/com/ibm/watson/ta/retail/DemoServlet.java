@@ -17,6 +17,9 @@ package com.ibm.watson.ta.retail;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,11 +30,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
+import org.apache.http.client.CookieStore;
 import org.apache.http.client.fluent.Executor;
 import org.apache.http.client.fluent.Request;
 import org.apache.http.client.fluent.Response;
+import org.apache.http.cookie.Cookie;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.InputStreamEntity;
 import org.apache.http.util.EntityUtils;
@@ -46,7 +52,8 @@ public class DemoServlet extends HttpServlet {
 
 	private String serviceName = "tradeoff_analytics";
 
-	// If running locally complete the variables below with the information in VCAP_SERVICES
+	// If running locally complete the variables below with the information in
+	// VCAP_SERVICES
 	private String baseURL = "http://localhost:8180/tradeoff-analytics-beta/api";
 	private String username = "<username>";
 	private String password = "<password>";
@@ -54,10 +61,14 @@ public class DemoServlet extends HttpServlet {
 	/**
 	 * Forward the request to the index.jsp file
 	 *
-	 * @param req the req
-	 * @param resp the resp
-	 * @throws ServletException the servlet exception
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @param req
+	 *            the req
+	 * @param resp
+	 *            the resp
+	 * @throws ServletException
+	 *             the servlet exception
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -67,14 +78,18 @@ public class DemoServlet extends HttpServlet {
 	/**
 	 * Create and POST a request to the Watson service
 	 *
-	 * @param req the Http Servlet request
-	 * @param resp the Http Servlet response
-	 * @throws ServletException the servlet exception
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @param req
+	 *            the Http Servlet request
+	 * @param resp
+	 *            the Http Servlet response
+	 * @throws ServletException
+	 *             the servlet exception
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	@Override
-	protected void doPost(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
-		logger.info("doPost");
+	protected void doPost(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException,
+			IOException {
 
 		req.setCharacterEncoding("UTF-8");
 		try {
@@ -84,13 +99,14 @@ public class DemoServlet extends HttpServlet {
 				url += "?" + queryStr;
 			}
 			URI uri = new URI(url).normalize();
+			logger.info("posting to " + url);
 
 			Request newReq = Request.Post(uri);
 			newReq.addHeader("Accept", "application/json");
 			InputStreamEntity entity = new InputStreamEntity(req.getInputStream());
-			newReq.bodyString(EntityUtils.toString(entity,"UTF-8"), ContentType.APPLICATION_JSON);
+			newReq.bodyString(EntityUtils.toString(entity, "UTF-8"), ContentType.APPLICATION_JSON);
 
-			Executor executor = Executor.newInstance().auth(username, password);
+			Executor executor = this.buildExecutor(uri);
 			Response response = executor.execute(newReq);
 			HttpResponse httpResponse = response.returnResponse();
 			resp.setStatus(httpResponse.getStatusLine().getStatusCode());
@@ -99,6 +115,8 @@ public class DemoServlet extends HttpServlet {
 			httpResponse.getEntity().writeTo(servletOutputStream);
 			servletOutputStream.flush();
 			servletOutputStream.close();
+
+			logger.info("post done");
 		} catch (Exception e) {
 			// Log something and return an error message
 			logger.log(Level.SEVERE, "got error: " + e.getMessage(), e);
@@ -107,20 +125,21 @@ public class DemoServlet extends HttpServlet {
 	}
 
 	/**
-	 * Gets the <b>VCAP_SERVICES</b> environment variable and return it
-	 *  as a JSONObject.
+	 * Gets the <b>VCAP_SERVICES</b> environment variable and return it as a
+	 * JSONObject.
 	 *
 	 * @return the VCAP_SERVICES as Json
 	 */
 	private JSONObject getVcapServices() {
 		String envServices = System.getenv("VCAP_SERVICES");
-		if (envServices == null) return null;
+		if (envServices == null)
+			return null;
 		JSONObject sysEnv = null;
 		try {
 			sysEnv = JSONObject.parse(envServices);
 		} catch (IOException e) {
 			// Do nothing, fall through to defaults
-			logger.log(Level.SEVERE, "Error parsing VCAP_SERVICES: "+e.getMessage(), e);
+			logger.log(Level.SEVERE, "Error parsing VCAP_SERVICES: " + e.getMessage(), e);
 		}
 		return sysEnv;
 	}
@@ -130,32 +149,66 @@ public class DemoServlet extends HttpServlet {
 		super.init();
 		processVCAP_Services();
 	}
+
 	/**
-	 * If exists, process the VCAP_SERVICES environment variable in order to get the
-	 * username, password and baseURL
+	 * If exists, process the VCAP_SERVICES environment variable in order to get
+	 * the username, password and baseURL
 	 */
 	private void processVCAP_Services() {
 		logger.info("Processing VCAP_SERVICES");
 		JSONObject sysEnv = getVcapServices();
-		if (sysEnv == null) return;
-		logger.info("Looking for: "+ serviceName );
+		if (sysEnv == null)
+			return;
+		logger.info("Looking for: " + serviceName);
 
 		for (Object key : sysEnv.keySet()) {
 			String keyString = (String) key;
 			logger.info("found key: " + key);
 			if (keyString.startsWith(serviceName)) {
-				JSONArray services = (JSONArray)sysEnv.get(key);
-				JSONObject service = (JSONObject)services.get(0);
-				JSONObject credentials = (JSONObject)service.get("credentials");
-				baseURL  = (String)credentials.get("url");
-				username = (String)credentials.get("username");
-				password = (String)credentials.get("password");
-				logger.info("baseURL  = "+baseURL);
-				logger.info("username = "+username);
-				logger.info("password = "+password);
+				JSONArray services = (JSONArray) sysEnv.get(key);
+				JSONObject service = (JSONObject) services.get(0);
+				JSONObject credentials = (JSONObject) service.get("credentials");
+				baseURL = (String) credentials.get("url");
+				username = (String) credentials.get("username");
+				password = (String) credentials.get("password");
+				logger.info("baseURL  = " + baseURL);
+				logger.info("username = " + username);
+				logger.info("password = " + password);
 			} else {
-				logger.info("Doesn't match /^"+serviceName+"/");
+				logger.info("Doesn't match /^" + serviceName + "/");
 			}
 		}
+	}
+
+	/**
+	 * Build an executor for the specified url. This disables cookies and sets
+	 * preemptive authentication (creds are sent without waiting for a 401).
+	 * 
+	 * NOTE: This is required to avoid issues with load balancers that use
+	 * cookies due to Apache Http Client issue:
+	 * https://issues.apache.org/jira/browse/HTTPCLIENT-1451
+	 * 
+	 * @param url
+	 * @return
+	 */
+	private Executor buildExecutor(URI url) {
+		return Executor.newInstance().auth(username, password)
+				.authPreemptive(new HttpHost(url.getHost(), url.getPort(), url.getScheme()))
+				.cookieStore(new CookieStore() {
+					// Noop cookie store.
+					public void addCookie(Cookie arg0) {
+					}
+
+					public void clear() {
+					}
+
+					public boolean clearExpired(Date arg0) {
+						return false;
+					}
+
+					public List<Cookie> getCookies() {
+						return Collections.emptyList();
+					}
+				});
 	}
 }

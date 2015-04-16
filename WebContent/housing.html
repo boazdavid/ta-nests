@@ -65,7 +65,7 @@
       title : 'Nests',
       breadCrumbs : [ {
         text : 'Home',
-        href : 'javascript:toMap()'
+        href : "javascript:hash('map')"
       }, {
       //text : utils.queryParams().state
       } ],
@@ -100,15 +100,6 @@
         });
       });
     });
-    //     function toMap() {
-    //       container.selectChild("map");
-    //     }
-    //     function toAbout() {
-    //       container.selectChild("about");
-    //     }
-    //     function toTermsOfUse() {
-    //       container.selectChild("termsOfUse");
-    //     }
     function stateClicked(abbr) {
       toState(abbr);
     }
