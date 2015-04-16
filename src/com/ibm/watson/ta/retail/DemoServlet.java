@@ -1,5 +1,5 @@
 /**
- * Copyright 2014 IBM Corp. All Rights Reserved.
+ * Copyright 2015 IBM Corp. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,9 +52,8 @@ public class DemoServlet extends HttpServlet {
 
 	private String serviceName = "tradeoff_analytics";
 
-	// If running locally complete the variables below with the information in
-	// VCAP_SERVICES
-	private String baseURL = "http://localhost:8180/tradeoff-analytics-beta/api";
+	// If running locally complete the variables below with the information in VCAP_SERVICES
+	private String baseURL = "https://gateway.watsonplatform.net/tradeoff-analytics-beta/api/";
 	private String username = "<username>";
 	private String password = "<password>";
 
@@ -62,9 +61,9 @@ public class DemoServlet extends HttpServlet {
 	 * Forward the request to the index.jsp file
 	 *
 	 * @param req
-	 *            the req
+	 *            the Http Servlet request
 	 * @param resp
-	 *            the resp
+	 *            the Http Servlet response
 	 * @throws ServletException
 	 *             the servlet exception
 	 * @throws IOException
