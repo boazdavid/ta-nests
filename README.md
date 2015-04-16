@@ -1,8 +1,14 @@
-# Tradeoff Analytics Nests Application
+# Nests
 
-  The IBM Watson [Tradeoff Analytics][service_url] service helps you make
+  Nests uses the IBM Watson [Tradeoff Analytics][service_url] service to helps you make
   better choices under multiple conflicting goals. The service combines smart
-  visualization and recommendations for tradeoff exploration.
+  visualization and recommendations for tradeoff exploration.  
+  
+  Demo: https://nests.mybluemix.net
+  
+Give it a try! Click the button below to fork into IBM DevOps Services and deploy your own copy of this application on Bluemix.
+
+[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/watson-developer-cloud/nest)
 
 ## Getting Started
 
@@ -93,7 +99,7 @@
     }
     ```
 
-		You need to copy the `username`, `password`, and `url`.
+	You need to copy the `username`, `password`, and `url`.
 
 2. Install the [Liberty profile runtime][liberty] (for Mac OSX, check this
    [guide][liberty_mac]).
