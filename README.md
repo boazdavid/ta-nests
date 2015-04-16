@@ -10,6 +10,17 @@ Give it a try! Click the button below to fork into IBM DevOps Services and deplo
 
 [![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/watson-developer-cloud/nest)
 
+## Screenshots
+
+Homepage  
+![home](http://s13.postimg.org/8ssbzk253/Screen_Shot_2015_04_16_at_1_32_52_PM.png "Home")
+
+Houses  
+![houses](http://s1.postimg.org/jcrs26xz3/Screen_Shot_2015_04_16_at_1_33_11_PM.png "Houses")
+
+Tradeoff Visualization  
+![tradeoff-visualization](http://s21.postimg.org/l8xrvfu5z/Screen_Shot_2015_04_16_at_1_33_25_PM.png "Tradeoff visualization")
+
 ## Getting Started
 
 1. Create a Bluemix Account
