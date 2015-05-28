@@ -1,15 +1,31 @@
-# Tradeoff Analytics Nests Application
+# Nests
 
-  The IBM Watson [Tradeoff Analytics][service_url] service helps you make
+  Nests uses the IBM Watson [Tradeoff Analytics][service_url] service to helps you make
   better choices under multiple conflicting goals. The service combines smart
-  visualization and recommendations for tradeoff exploration.
+  visualization and recommendations for tradeoff exploration.  
+  
+  Demo: https://nests.mybluemix.net
+  
+Give it a try! Click the button below to fork into IBM DevOps Services and deploy your own copy of this application on Bluemix.
+
+[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/watson-developer-cloud/nest)
+
+## Screenshots
+
+Homepage  
+![home](http://s13.postimg.org/8ssbzk253/Screen_Shot_2015_04_16_at_1_32_52_PM.png "Home")
+
+Houses  
+![houses](http://s1.postimg.org/jcrs26xz3/Screen_Shot_2015_04_16_at_1_33_11_PM.png "Houses")
+
+Tradeoff Visualization  
+![tradeoff-visualization](http://s21.postimg.org/l8xrvfu5z/Screen_Shot_2015_04_16_at_1_33_25_PM.png "Tradeoff visualization")
 
 ## Getting Started
 
 1. Create a Bluemix Account
 
-   [Sign up][sign_up] in Bluemix or use an existing account. Watson Services
-   in Beta are free to use.
+   [Sign up][sign_up] in Bluemix or use an existing account. 
 
 2. Download and install the [Cloud-foundry CLI][cloud_foundry] tool.
 
@@ -37,7 +53,7 @@
 5. Create the Tradeoff Analytics service in Bluemix.
 
   ```sh
-  $ cf create-service tradeoff_analytics free tradeoff-analytics-service
+  $ cf create-service tradeoff_analytics standard tradeoff-analytics-service
   ```
 
 6. Download and install the [ant][ant] compiler.
@@ -87,13 +103,13 @@
           },
         "label": "tradeoff-analytics",
         "name": "tradeoff-analytics-service",
-        "plan": "free"
+        "plan": "standard"
      }]
     }
     }
     ```
 
-		You need to copy the `username`, `password`, and `url`.
+	You need to copy the `username`, `password`, and `url`.
 
 2. Install the [Liberty profile runtime][liberty] (for Mac OSX, check this
    [guide][liberty_mac]).
