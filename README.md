@@ -25,7 +25,7 @@ Tradeoff Visualization
 
 1. Create a Bluemix Account
 
-   [Sign up][sign_up] in Bluemix or use an existing account. 
+   [Sign up][sign_up] in Bluemix or use an existing account.
 
 2. Download and install the [Cloud-foundry CLI][cloud_foundry] tool.
 
