@@ -25,8 +25,7 @@ Tradeoff Visualization
 
 1. Create a Bluemix Account
 
-   [Sign up][sign_up] in Bluemix or use an existing account. Watson Services
-   in Beta are free to use.
+   [Sign up][sign_up] in Bluemix or use an existing account.
 
 2. Download and install the [Cloud-foundry CLI][cloud_foundry] tool.
 
@@ -54,7 +53,7 @@ Tradeoff Visualization
 5. Create the Tradeoff Analytics service in Bluemix.
 
   ```sh
-  $ cf create-service tradeoff_analytics free tradeoff-analytics-service
+  $ cf create-service tradeoff_analytics standard tradeoff-analytics-service
   ```
 
 6. Download and install the [ant][ant] compiler.
@@ -104,7 +103,7 @@ Tradeoff Visualization
           },
         "label": "tradeoff-analytics",
         "name": "tradeoff-analytics-service",
-        "plan": "free"
+        "plan": "standard"
      }]
     }
     }

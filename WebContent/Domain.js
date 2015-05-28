@@ -145,7 +145,7 @@ define([ "dojo/_base/declare" ], function(declare) {
         options : dojo.map(options, function(op) {
           var values = {};
           numAtts.forEach(function(col) {
-            values[col.key] = op[col.key];
+            values[col.key] = parseFloat(op[col.key]);
           });
           return {
             key : this.meta.keyFunction(op),
