@@ -53,7 +53,7 @@ public class DemoServlet extends HttpServlet {
 	private String serviceName = "tradeoff_analytics";
 
 	// If running locally complete the variables below with the information in VCAP_SERVICES
-	private String baseURL = "https://gateway.watsonplatform.net/tradeoff-analytics-beta/api/";
+	private String baseURL = "https://gateway.watsonplatform.net/tradeoff-analytics/api/";
 	private String username = "<username>";
 	private String password = "<password>";
 
