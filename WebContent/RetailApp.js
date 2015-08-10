@@ -36,9 +36,7 @@ define(['dojo/_base/declare', 'dijit/_Widget', 'dijit/_TemplatedMixin', 'dijit/_
       dojo.addClass(dojo.body(), ops.cssClass);
       this.taClient = new TradeoffAnalytics({
         dilemmaServiceUrl : 'demo',
-        // customCssUrl : 'http://localhost:8180/modmt-client/modmt/styles/' +
-        // ops.theme + '.css',
-        customCssUrl : 'http://ta-cdn.mybluemix.net/v1/modmt/styles/' + ops.theme + '.css',
+        customCssUrl : 'https://ta-cdn.mybluemix.net/v1/modmt/styles/' + ops.theme + '.css',
         // profile: profile,
         errCallback : dojo.hitch(this, this.errorCallback)
       }, this.taPlaceholder);
