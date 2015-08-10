@@ -13,7 +13,6 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-'use strict';
 /*global utils */
 
 function assert(cond, message) {
@@ -91,7 +90,7 @@ Array.prototype.equals = function(array) {
     return true;
   };
 
-utils = {
+var utils = {
   entries: function(obj) {
     var arr = [];
     for (var k in obj) {
