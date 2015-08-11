@@ -13,7 +13,6 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-'use strict';
 /*global define, dojo, utils, dojox*/
 
 define(['dojo/_base/declare', 'dijit/_Widget', 'dojox/form/RangeSlider',
