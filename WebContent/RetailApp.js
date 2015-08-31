@@ -151,7 +151,8 @@ define([ "dojo/_base/declare", "dijit/_Widget", "dijit/_TemplatedMixin", "dijit/
         _this.moovDialog.show();
         _this.moovDialog.resize();
         _this.standby.hide();
-      }, dojo.hitch(this, this.done));
+      });
+      this.taClient.subscribe('doneClicked', dojo.hitch(this, this.done));
     },
 
     done : function() {
