@@ -1,41 +1,42 @@
 /**
  * Copyright 2015 IBM Corp. All Rights Reserved.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+/* global dojo, define, TradeoffAnalytics, dijit, assert */
 
-define([ "dojo/_base/declare", "dijit/_Widget", "dijit/_TemplatedMixin", "dijit/_WidgetsInTemplateMixin",
-    "dojo/text!./RetailApp.html", "dojox/grid/EnhancedGrid", "dojo/store/Memory", "dojo/data/ObjectStore",
-    "dojo/request", "dijit/layout/BorderContainer", "dijit/layout/ContentPane", "dijit/TitlePane", "dijit/Dialog",
-    "dojo/store/Memory", "dijit/form/ComboBox",  "dijit/TooltipDialog", "retail/FiltersWidget",
-    "retail/Domain", "retail/LearnWizard", "retail/FavoriteWizard" ], function(declare, _Widget, _TemplatedMixin,
+
+define(['dojo/_base/declare', 'dijit/_Widget', 'dijit/_TemplatedMixin', 'dijit/_WidgetsInTemplateMixin',
+'dojo/text!./RetailApp.html', 'dojox/grid/EnhancedGrid', 'dojo/store/Memory', 'dojo/data/ObjectStore',
+'dojo/request', 'dijit/layout/BorderContainer', 'dijit/layout/ContentPane', 'dijit/TitlePane', 'dijit/Dialog',
+'dojo/store/Memory', 'dijit/form/ComboBox', 'dijit/TooltipDialog', 'retail/FiltersWidget',
+'retail/Domain', 'retail/LearnWizard', 'retail/FavoriteWizard'
+], function(declare, _Widget, _TemplatedMixin,
     _WidgetsInTemplateMixin, template) {
-  return declare("retail.RetailApp", [ _Widget, _TemplatedMixin, _WidgetsInTemplateMixin ], {
+  return declare('retail.RetailApp', [ _Widget, _TemplatedMixin, _WidgetsInTemplateMixin ], {
     templateString : template,
     widgetsInTemplate : true,
 
     startup : function() {
       this.inherited(arguments);
-      dojo.addClass(dojo.body(), "retailApp");
+      dojo.addClass(dojo.body(), 'retailApp');
     },
     start : function(ops, callback) {
       this.ops = ops;
       dojo.addClass(dojo.body(), ops.cssClass);
       this.taClient = new TradeoffAnalytics({
         dilemmaServiceUrl : 'demo',
-        // customCssUrl : 'http://localhost:8180/modmt-client/modmt/styles/' +
-        // ops.theme + '.css',
-        customCssUrl : 'http://ta-cdn.mybluemix.net/v1/modmt/styles/' + ops.theme + '.css',
+        customCssUrl : 'https://ta-cdn.mybluemix.net/v1/modmt/styles/' + ops.theme + '.css',
         // profile: profile,
         errCallback : dojo.hitch(this, this.errorCallback)
       }, this.taPlaceholder);
@@ -49,7 +50,7 @@ define([ "dojo/_base/declare", "dijit/_Widget", "dijit/_TemplatedMixin", "dijit/
     },
     loadDomain : function(callback) {
       var _this = this, ops = this.ops;
-      require([ ops.meta.module, ops.data.module ], function(m, d) {
+      require([ ops.meta.module, ops.data.module ], function() {
 
         var metaClass = eval(ops.meta.clazz);
         assert(metaClass);
@@ -75,9 +76,7 @@ define([ "dojo/_base/declare", "dijit/_Widget", "dijit/_TemplatedMixin", "dijit/
     setBreadCrumbs : function() {
       dojo.empty(this.breadCrumbs);
       dojo.forEach(this.ops.breadCrumbs, function(breadCrumb, i) {
-        i && dojo.create('span', {
-          innerHTML : ' &gt; '
-        }, this.breadCrumbs);
+        i && dojo.create('span', { innerHTML : ' &gt; ' }, this.breadCrumbs);
         dojo.create('a', {
           href : breadCrumb.href || 'javascript:void(0)',
           innerHTML : breadCrumb.text
@@ -103,21 +102,21 @@ define([ "dojo/_base/declare", "dijit/_Widget", "dijit/_TemplatedMixin", "dijit/
         cells : domain.meta.gridColumns()
       } ]);
 
-      this.connect(domain, "changed", this.refresh);
+      this.connect(domain, 'changed', this.refresh);
 
       this.refresh();
     },
     loadData : function(dataUrl, callback, errorCallback) {
       dojo.xhrGet({
         url : dataUrl,
-        handleAs : "json",
+        handleAs : 'json',
         load : callback,
         error : errorCallback
       });
     },
     errorCallback : function(err) {
       this.standby.hide();
-      alert(err.message + "\n" + err.responseText);
+      console.error(err.message + '\n' + err.responseText);
     },
     refresh : function() {
       var domain = this.domain;
@@ -129,7 +128,7 @@ define([ "dojo/_base/declare", "dijit/_Widget", "dijit/_TemplatedMixin", "dijit/
       });
       this.grid.setStore(store);
 
-      this.statusLine.innerHTML = "Showing {in} options of {all}".formatAll({
+      this.statusLine.innerHTML = 'Showing {in} options of {all}'.formatAll({
         'in' : domain.opsIn.length,
         all : domain.allOps.length
       });
@@ -172,7 +171,7 @@ define([ "dojo/_base/declare", "dijit/_Widget", "dijit/_TemplatedMixin", "dijit/
       dijit.popup.open({
         popup : this.inviteTooltip,
         around : this.smartButton.domNode,
-        orient : [ "before-centered" ]
+        orient : [ 'before-centered' ]
       });
     },
     closeInviteTooltip : function() {
@@ -198,7 +197,7 @@ define([ "dojo/_base/declare", "dijit/_Widget", "dijit/_TemplatedMixin", "dijit/
       dijit.popup.open({
         popup : this.favoriteTooltip,
         around : node,
-        orient : [ "after-centered" ]
+        orient : [ 'after-centered' ]
       });
     },
     closeFavoriteTooltip : function() {
@@ -212,5 +211,5 @@ define([ "dojo/_base/declare", "dijit/_Widget", "dijit/_TemplatedMixin", "dijit/
       this.closeFavoriteTooltip();
       this.learn();
     }
-  })
+  });
 });
