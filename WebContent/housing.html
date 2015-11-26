@@ -54,7 +54,9 @@
     };
   </script>
 	<script src="//ajax.googleapis.com/ajax/libs/dojo/1.9.3/dojo/dojo.js" data-dojo-config="async: true"></script>
-	<script type="text/javascript" src="https://ta-cdn.mybluemix.net/v1/TradeoffAnalytics.js"></script>
+<!--  	<script type="text/javascript" src="http://localhost:3000/TradeoffAnalytics.js"></script> -->
+<!-- 	<script type="text/javascript" src="https://ta-cdn-beta.stage1.mybluemix.net/v2/TradeoffAnalytics.js"></script> -->
+<script type="text/javascript" src="https://ta-cdn.mybluemix.net/v1/TradeoffAnalytics.js"></script>
 	<script src="utils.js"></script>
 
 	<script>
@@ -120,8 +122,9 @@
     function toState(abbr) {
       hash("appPane");
       housingDomain.data.args.query = 'sState=' + abbr;
-      housingDomain.breadCrumbs[1].text = stateName(abbr);
-      app.loadAndBind(abbr, function() {
+      var state = stateName(abbr);
+      housingDomain.breadCrumbs[1].text = state;
+      app.loadAndBind(state, function() {
         console.log('loaded');
       });
     }

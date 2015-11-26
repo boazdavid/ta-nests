@@ -46,8 +46,8 @@ import com.ibm.json.java.JSONArray;
 import com.ibm.json.java.JSONObject;
 
 @MultipartConfig
-public class DemoServlet extends HttpServlet {
-	private static Logger logger = Logger.getLogger(DemoServlet.class.getName());
+public class TAProxyServlet extends HttpServlet {
+	private static Logger logger = Logger.getLogger(TAProxyServlet.class.getName());
 	private static final long serialVersionUID = 1L;
 
 	private String serviceName = "tradeoff_analytics";
@@ -92,8 +92,11 @@ public class DemoServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		try {
+			String reqURI = req.getRequestURI();
+			String endpoint = reqURI.substring(reqURI.lastIndexOf('/') + 1);
+			String url = baseURL + "/v1/" + endpoint;
+			// concatenate query params
 			String queryStr = req.getQueryString();
-			String url = baseURL + "/v1/dilemmas";
 			if (queryStr != null) {
 				url += "?" + queryStr;
 			}
@@ -102,6 +105,13 @@ public class DemoServlet extends HttpServlet {
 
 			Request newReq = Request.Post(uri);
 			newReq.addHeader("Accept", "application/json");
+			
+			String metadata = req.getHeader("x-watson-metadata");
+			if (metadata != null) {
+				metadata += "client-ip:" + req.getRemoteAddr();
+				newReq.addHeader("x-watson-metadata",metadata);
+			}
+			
 			InputStreamEntity entity = new InputStreamEntity(req.getInputStream());
 			newReq.bodyString(EntityUtils.toString(entity, "UTF-8"), ContentType.APPLICATION_JSON);
 
