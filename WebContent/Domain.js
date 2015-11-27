@@ -16,7 +16,7 @@
 'use strict';
 /*global define, dojo */
 
-define(['dojo/_base/declare'], function(declare) {
+define(['dojo/_base/declare','dojox/uuid/generateRandomUuid'], function(declare,generateRandomUuid) {
   return declare('retail.Domain', [], {
 
     constructor: function(meta, options) {
@@ -24,7 +24,7 @@ define(['dojo/_base/declare'], function(declare) {
       this.filters = {};
       this.allOps = options;
       this.opsIn = options;
-
+      
       dojo.forEach(this.allOps, function(op) {
         op.changed = function() {};
       });
@@ -106,7 +106,7 @@ define(['dojo/_base/declare'], function(declare) {
         callback && callback();
       } else {
         var meta = this.meta;
-        var dilemmaUrl = 'demo?generate_visualization=false';
+        var dilemmaUrl = 'dilemmas?generate_visualization=false';
 
         function afterDilemma(response) {
           var respObj = JSON.parse(response);
@@ -119,8 +119,28 @@ define(['dojo/_base/declare'], function(declare) {
           });
           callback && callback();
         }
-
-        xhr(dilemmaUrl, 'POST', {}, JSON.stringify(this.makeProblem(options)), afterDilemma, function(e) {
+        
+        this.datasetUUID = generateRandomUuid();
+       var metadata = {
+          'app-version': meta.APP_VERSION,            
+          'service-call-uuid': generateRandomUuid(),
+          'dataset-name': meta.app.state,
+          'dataset-id': this.datasetUUID
+       };
+       
+       var metadataString = "";
+		for (var key in metadata) {
+			if (metadata.hasOwnProperty(key)) {
+				metadataString += key + '=' + metadata[key] +';';
+			}
+		}
+       
+        var headers = {
+           'x-watson-metadata' : metadataString,   
+           'Content-Type' :'application/json; charset=UTF-8'
+        }
+        
+        xhr(dilemmaUrl, 'POST', headers, JSON.stringify(this.makeProblem(options)), afterDilemma, function(e) {
           throw e;
         });
       }
