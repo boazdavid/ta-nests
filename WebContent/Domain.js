@@ -15,7 +15,6 @@
  */
 'use strict';
 /*global define, dojo */
-
 define(['dojo/_base/declare','dojox/uuid/generateRandomUuid'], function(declare,generateRandomUuid) {
   return declare('retail.Domain', [], {
 
@@ -95,6 +94,18 @@ define(['dojo/_base/declare','dojox/uuid/generateRandomUuid'], function(declare,
     },
     // enrich the data and meta objects with frontier information
     analyzeFrontier: function(options, callback) {
+      function afterDilemma(response) {
+        var respObj = JSON.parse(response);
+        options.forEach(function(op) {
+          var ref = respObj.resolution.solutions.first(function(ref) {
+            return meta.keyFunction(op) === ref.solution_ref;
+          });
+          op.favorite = (ref.status === 'FRONT');
+          op.changed();
+        });
+        callback && callback();
+      }
+      
       if (!options) {
         return;
       }
@@ -108,18 +119,6 @@ define(['dojo/_base/declare','dojox/uuid/generateRandomUuid'], function(declare,
         var meta = this.meta;
         var dilemmaUrl = 'dilemmas?generate_visualization=false';
 
-        function afterDilemma(response) {
-          var respObj = JSON.parse(response);
-          options.forEach(function(op) {
-            var ref = respObj.resolution.solutions.first(function(ref) {
-              return meta.keyFunction(op) === ref.solution_ref;
-            });
-            op.favorite = (ref.status === 'FRONT');
-            op.changed();
-          });
-          callback && callback();
-        }
-        
         this.datasetUUID = generateRandomUuid();
        var metadata = {
           'app-version': meta.APP_VERSION,            

@@ -82,7 +82,7 @@ Tradeoff Visualization
   so you need to download and install the profile as part of the steps below.
 
 1. Copy the credentials from your `tradeoff-analytics-service` service in Bluemix to
-   `DemoServlet.java`. You can use the following command to see the
+   `TAProxyServlet.java`. You can use the following command to see the
    credentials:
 
     ```sh

@@ -26,7 +26,7 @@ define(['dojo/_base/declare', 'dijit/_Widget', 'dijit/_TemplatedMixin', 'dijit/_
   return declare('retail.RetailApp', [ _Widget, _TemplatedMixin, _WidgetsInTemplateMixin ], {
     templateString : template,
     widgetsInTemplate : true,
-    APP_VERSION : "2015-11-16",  //change this when updating!
+    APP_VERSION : "2016-01-04",  //change this when updating!
 
 
     startup : function() {
