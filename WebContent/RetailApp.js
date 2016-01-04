@@ -26,6 +26,8 @@ define(['dojo/_base/declare', 'dijit/_Widget', 'dijit/_TemplatedMixin', 'dijit/_
   return declare('retail.RetailApp', [ _Widget, _TemplatedMixin, _WidgetsInTemplateMixin ], {
     templateString : template,
     widgetsInTemplate : true,
+    APP_VERSION : "2015-11-16",  //change this when updating!
+
 
     startup : function() {
       this.inherited(arguments);
@@ -34,8 +36,12 @@ define(['dojo/_base/declare', 'dijit/_Widget', 'dijit/_TemplatedMixin', 'dijit/_
     start : function(ops, callback) {
       this.ops = ops;
       dojo.addClass(dojo.body(), ops.cssClass);
-      this.taClient = new TradeoffAnalytics({
-        dilemmaServiceUrl : 'demo',
+      this.taClient = new TA.TradeoffAnalytics({
+        dilemmaServiceUrl: 'dilemmas',
+	    analyticsEventsUrl: 'events',
+	    metadata: {
+	      'app-version' : this.APP_VERSION
+	    },
         customCssUrl : 'https://ta-cdn.mybluemix.net/v1/modmt/styles/' + ops.theme + '.css',
         // profile: profile,
         errCallback : dojo.hitch(this, this.errorCallback)
@@ -56,6 +62,7 @@ define(['dojo/_base/declare', 'dijit/_Widget', 'dijit/_TemplatedMixin', 'dijit/_
         assert(metaClass);
         var meta = new metaClass.prototype.constructor(_this);
         meta.subject = ops.subject;
+        meta.APP_VERSION= _this.APP_VERSION;
 
         var dataProviderClass = eval(ops.data.clazz);
         assert(dataProviderClass);
@@ -66,7 +73,8 @@ define(['dojo/_base/declare', 'dijit/_Widget', 'dijit/_TemplatedMixin', 'dijit/_
         }, dojo.hitch(_this, _this.errorCallback));
       });
     },
-    loadAndBind : function(abbr, callback) {
+    loadAndBind : function(state, callback) {
+      this.state = state;
       this.setBreadCrumbs();
       this.loadDomain(dojo.hitch(this, function(domain) {
         this._bind(domain);
@@ -150,6 +158,9 @@ define(['dojo/_base/declare', 'dijit/_Widget', 'dijit/_TemplatedMixin', 'dijit/_
         _this.moovDialog.show();
         _this.moovDialog.resize();
         _this.standby.hide();
+      },{
+      	"dataset-name" : this.state,
+      	'dataset-id': this.domain.datasetUUID
       });
       this.taClient.subscribe('doneClicked', dojo.hitch(this, this.done));
     },
