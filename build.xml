@@ -7,7 +7,7 @@
 	<property name="debuglevel" value="source,lines,vars" />
 	<property name="target" value="1.6" />
 	<property name="source" value="1.6" />
-	<property name="ARCHIVE_DIR" value="" />
+	<property name="ARCHIVE_DIR" value="output" />
 	<property name="LIB_DIR" value="./lib" />
 	<property name="WEB_INF_LIB_DIR" value="./WebContent/WEB-INF/lib" />
 	<property name="warname" value="webApp.war" />
@@ -26,7 +26,7 @@
 	</target>
 	<target name="clean">
 		<delete dir="build" />
-		<delete file="${warname}" />
+		<delete file="${ARCHIVE_DIR}/${warname}" />
 	</target>
 	<target name="build" depends="build-project,build-war" />
 	<target name="cleanall" depends="clean" />
