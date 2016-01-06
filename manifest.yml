@@ -7,5 +7,5 @@ applications:
 - services:
   - tradeoff-analytics-service
   name: nests
-  path: webApp.war
+  path: output/webApp.war
   memory: 512M
